@@ -1,6 +1,6 @@
-Introductory React tutorial. Search for a github username, and theuser's name, company, and profile image will be displayed on the screen. 
+Introductory React tutorial. Search for a github username, and the user's name, company, and profile image will be displayed on the screen. 
 
-Suggestion for improvment: Add error handling
+Suggestion for improvment: Add error handling.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
