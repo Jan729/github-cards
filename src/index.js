@@ -1,6 +1,10 @@
 import React from 'react'; //version 16.13.1 (can also use {React.version})
 import ReactDOM from 'react-dom';
 import './index.css';
+import axios from 'axios'; //npm install axios --save
+
+//Note: I added a bunch of comments to take notes while watching the tutorial
+//for real projects, I'll only include comments when necessary
 
 const testData = [
     { name: "Dan Abramov", avatar_url: "https://avatars0.githubusercontent.com/u/810438?v=4", company: "@facebook" },
@@ -16,7 +20,6 @@ const testData = [
 const CardList = (props) => (
     <div>
         {props.profiles.map(profile => <Card {...profile}/>)}
-
     </div>
 );
 
@@ -55,12 +58,13 @@ class Form extends React.Component {
 
     state = { userName: '' };
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         //prevent default form submission from refreshing page
         event.preventDefault();
-        console.log(
-            this.state.userName
-        );
+        const resp = await
+            axios.get(`https://api.github.com/users/${this.state.userName}`); //use template string to concat userName
+        this.props.onSubmit(resp.data); //send parsed json data to onSubmit fxn
+        this.setState({ userName: ''}); //clear input text field
     }
 
     //use onChange to tell React when to take control
@@ -101,11 +105,17 @@ class App extends React.Component {
         profiles: testData,
     };
 
+    addNewProfile = (profileData) => {
+        this.setState(prevState => ({
+            profiles: [...prevState.profiles, profileData], //concat new profile onto previous profiles list
+        }))    
+    };
+
     render() {
         return (
             <div>
                 <div className="header">{this.props.title}</div>
-                <Form/>
+                <Form onSubmit={this.addNewProfile}/>
                 <CardList profiles={this.state.profiles}/>
 
             </div>
