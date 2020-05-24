@@ -1,4 +1,6 @@
-Introductory React tutorial. Search for a github username, and the user's name, company, and profile image will be displayed on the screen. 
+Search for a github username, and the user's name, company, and profile image will be displayed on the screen. 
+
+Code is from the Pluralsight introductory React tutorial "React: Getting Started" by Samer Buna. 
 
 Suggestion for improvment: Add error handling.
 
